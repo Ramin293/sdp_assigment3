@@ -1,2 +1,4 @@
 src/Renderer.java
+src/Shape.java
+src/Circle.java
 src/VectorRenderer.java

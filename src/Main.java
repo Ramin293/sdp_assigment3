@@ -51,6 +51,13 @@ public final class Main {
                     + expectedBefore + ", after=" + expectedAfter);
         }
 
+        check("T6", "Circle + AsciiRenderer",
+                new Circle("C-01", 2, new AsciiRenderer()).execute(),
+                "ASCII circle radius=2: (o)");
+        check("T7", "Square + AsciiRenderer",
+                new Square("S-01", 3, new AsciiRenderer()).execute(),
+                "ASCII square side=3: [#]");
+
         System.out.println("SUMMARY: " + passed + "/" + total + " PASS");
     }
 

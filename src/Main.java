@@ -24,6 +24,33 @@ public final class Main {
                 new Square("S-01", 3, new RasterRenderer()).execute(),
                 "RASTER square side=3 (pixels)");
 
+        Circle original = new Circle("C-02", 2, new VectorRenderer());
+        Shape sameReference = original;
+        String idBefore = original.getId();
+        int radiusBefore = original.getRadius();
+        String before = original.execute();
+        original.setImplementation(new RasterRenderer());
+        String after = sameReference.execute();
+        boolean sameObject = original == sameReference;
+        boolean stateUnchanged = original.getId().equals(idBefore)
+                && original.getRadius() == radiusBefore;
+        String expectedBefore = "VECTOR circle radius=2";
+        String expectedAfter = "RASTER circle radius=2 (pixels)";
+        boolean switchPassed = sameObject && stateUnchanged
+                && expectedBefore.equals(before) && expectedAfter.equals(after);
+        total++;
+        if (switchPassed) {
+            passed++;
+        }
+        System.out.println("T5 " + status(switchPassed)
+                + " | Circle + VectorRenderer -> RasterRenderer"
+                + " | sameObject=" + sameObject + " | stateUnchanged=" + stateUnchanged
+                + " | before=" + before + " | after=" + after);
+        if (!switchPassed) {
+            System.out.println("   expected: sameObject=true, stateUnchanged=true, before="
+                    + expectedBefore + ", after=" + expectedAfter);
+        }
+
         System.out.println("SUMMARY: " + passed + "/" + total + " PASS");
     }
 
